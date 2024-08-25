@@ -1,6 +1,3 @@
-# g2-intern-202408-02
-夏期インターン用リポジトリ0821-23
-
 # Git
 ## branch規則
 name/function
