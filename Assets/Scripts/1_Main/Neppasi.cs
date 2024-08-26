@@ -6,6 +6,9 @@ public class Neppasi : AttackPlayer
     private BurnOutEffect _effect;
     private AttackPlayerHealth _health;
 
+    [SerializeField] 
+    private AudioClip hpSE;
+
     protected override void Start()
     {
         base.Start();
@@ -18,11 +21,13 @@ public class Neppasi : AttackPlayer
     {
         if (Time.timeScale != 0f)
         {
+            soundManager.PlaySE(hpSE);
             hp--;
         }
 
         if (hp <= 0)
         {
+            soundManager.StopSound();
             Die();
         }
     }

@@ -9,6 +9,9 @@ public class rouryu : AttackPlayer
 
     private Collider2D objectCollider2D;
 
+    [SerializeField] 
+    private AudioClip hpSE;
+
      protected override void Start()
     {
         base.Start();
@@ -37,11 +40,13 @@ public class rouryu : AttackPlayer
 
                 if (Time.timeScale != 0f)
                 {
+                    soundManager.PlaySE(hpSE);
                     hp--;
                 }
                 // HPが0になったらキャラクターが死ぬ
                 if (hp <= 0)
                 {
+                    soundManager.StopSound();
                     Die();
                 }
             }

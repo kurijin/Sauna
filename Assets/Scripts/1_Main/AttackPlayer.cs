@@ -17,13 +17,21 @@ public class AttackPlayer : MonoBehaviour
     [SerializeField] private AudioClip appearSE;
     [SerializeField] protected AudioClip deathSE;
 
+    private GameObject supportUI;
+
     /// 敵が出現してから消えるまでの時間を測る
     private float elapsedTime;
 
     protected virtual void Start()
     {
+        Transform canvasTransform = gameObject.transform.Find("Canvas");
+        supportUI = canvasTransform.Find("Image")?.gameObject;
+        supportUI.SetActive(false);
+        StartCoroutine(Blink());
 
         GameObject audioManager = GameObject.Find("AudioManager");
+
+
         if (audioManager != null)
         {
             soundManager = audioManager.GetComponent<SoundManager>();
@@ -41,6 +49,11 @@ public class AttackPlayer : MonoBehaviour
     {
         elapsedTime += Time.deltaTime;
 
+        if(elapsedTime >= 1f)
+        {
+            supportUI.SetActive(true);
+        }
+    
         // 滞在時間を超えたら攻撃
         if (elapsedTime >= time)
         {
@@ -81,13 +94,12 @@ public class AttackPlayer : MonoBehaviour
     // 点滅して消える処理
     private IEnumerator Blink()
     {
-        // 点滅処理(今回は5回点滅)
-        for (int i = 0; i < 5; i++)
+        while (true) 
         {
-            GetComponent<Renderer>().enabled = false;
-            yield return new WaitForSeconds(0.1f);
-            GetComponent<Renderer>().enabled = true;
-            yield return new WaitForSeconds(0.1f);
+            supportUI.GetComponent<CanvasRenderer>().SetAlpha(0f); 
+            yield return new WaitForSeconds(0.8f); 
+            supportUI.GetComponent<CanvasRenderer>().SetAlpha(1f); 
+            yield return new WaitForSeconds(0.8f); 
         }
     }
 }
