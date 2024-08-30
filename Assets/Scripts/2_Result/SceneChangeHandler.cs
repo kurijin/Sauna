@@ -1,25 +1,25 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class SceneChangeHandler : MonoBehaviour
 {
-    public Button replayButton;  
-    public Button titleButton;   
+    public Button _replayButton;
+    public Button _titleButton;
 
-    void Start()
+    private void Start()
     {
-        replayButton.onClick.AddListener(() => Replay());
-        titleButton.onClick.AddListener(() => Title());
+        _replayButton.onClick.AddListener(Replay);
+        _titleButton.onClick.AddListener(Title);
     }
 
-    void Replay()
+    private static void Replay()
     {
         SceneChanger.Instance.ToMainScene();
-    }  
-  
-    
-    void Title()
+    }
+
+
+    private static void Title()
     {
         SceneChanger.Instance.ToTitleScene();
     }
