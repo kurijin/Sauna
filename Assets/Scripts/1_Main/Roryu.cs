@@ -1,29 +1,22 @@
 using UnityEngine;
 
-public class rouryu : AttackPlayer
+/// <summary>敵クラス </summary>
+public class Roryu : AttackPlayer
 {
     // 開始地点と現在位置
-    private Vector2 initialPosition;
-    private Vector2 previousDirection;
-    private bool isUnder = false;
+    private Vector2 _initialPosition;
+    private Vector2 _previousDirection;
+    private bool _isUnder;
 
-    private Collider2D objectCollider2D;
+    private Collider2D _objectCollider2D;
 
-    [SerializeField] 
-    private AudioClip hpSE;
+    [SerializeField,Header("鳴らしたいSE")] private AudioClip _hpSE;
 
      protected override void Start()
     {
         base.Start();
-        objectCollider2D = GetComponent<Collider2D>();
+        _objectCollider2D = GetComponent<Collider2D>();
     }
-
-    // protected override void Start()
-    // {
-    //     base.Start();
-    //     objectCollider2D = GetComponent<Collider2D>();
-    // }
-
 
     // 上下にマウススクロールでダメージを受ける処理
     protected override void Update()
@@ -33,18 +26,18 @@ public class rouryu : AttackPlayer
         if (Input.GetMouseButton(0) && IsMouseInsideCollider())
         {
             // 上下判定で、オブジェクトの中心を上下方向に通り過ぎたらダメージ
-            if (isUnder != Camera.main.WorldToScreenPoint(transform.position).y >= ((Vector2)Input.mousePosition).y)
+            if (_isUnder != Camera.main.WorldToScreenPoint(transform.position).y >= ((Vector2)Input.mousePosition).y)
             {
                 // 上下反転
-                isUnder = !isUnder;
+                _isUnder = !_isUnder;
 
                 if (Time.timeScale != 0f)
                 {
-                    soundManager.PlaySE(hpSE);
-                    hp--;
+                    soundManager.PlaySE(_hpSE);
+                    _hp--;
                 }
                 // HPが0になったらキャラクターが死ぬ
-                if (hp <= 0)
+                if (_hp <= 0)
                 {
                     soundManager.StopSound();
                     Die();
@@ -57,9 +50,9 @@ public class rouryu : AttackPlayer
     private bool IsMouseInsideCollider()
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (objectCollider2D != null)
+        if (_objectCollider2D != null)
         {
-            return objectCollider2D.OverlapPoint(mousePosition);
+            return _objectCollider2D.OverlapPoint(mousePosition);
         }
         return false;
     }

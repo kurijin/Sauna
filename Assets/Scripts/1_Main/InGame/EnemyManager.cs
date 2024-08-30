@@ -3,57 +3,20 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField, Header("敵の出現数")]
-    private int _enemyAmount = 1;
+    [SerializeField, Header("敵の出現数")] private int _enemyAmount = 1;
+    [SerializeField, Header("敵の出現間隔")] private float _appearTime = 2;
+    [SerializeField,Header("各EnemyManagerごとのラグ")] private float _appearLag;
+    private float _appearTimeCount;
 
-    /// <summary>
-    /// 敵出現数のセッター
-    /// </summary>
-    /// <param name="amount"></param>
-    public void SetEnemyAmount(int amount)
-    {
-        _enemyAmount = amount;
-    }
+    [SerializeField,Header("敵")] private GameObject[] _enemies;
 
-    [SerializeField, Header("敵の出現間隔")]
-    private float _apperTime = 2;
+    [SerializeField,Header("Minの値とMaxの値をVectorでやってる？")] private Vector2 _generatePosX;
+    [SerializeField,Header("Minの値とMaxの値をVectorでやってる？")] private Vector2 _generatePosY;
 
-    /// <summary>
-    /// 敵出現間隔のセッター
-    /// </summary>
-    /// <param name="apperTime"></param>
-    public void SetApperTime(float apperTime)
-    {
-        _apperTime = apperTime;
-    }
-
-    [SerializeField]
-    private float _apperLag = 0;
-
-    public void SetApperLag(float apperLag)
-    {
-        _apperLag = apperLag;
-    }
-
-    private float _apperTimeCount = 0;
-
-    [SerializeField]
-    private GameObject[] _enemies;
-
-    [SerializeField]
-    private Vector2 _generatePosX;
-
-    [SerializeField]
-    private Vector2 _generatePosY;
-
-    [SerializeField]
-    private Transform _playerTrans;
-
+    [SerializeField] private Transform _playerTrans;
     private Vector2 _playerPos => _playerTrans.position;
 
-    [SerializeField,Header("プレイヤーの範囲")]
-    private float _playerDistance;
-
+    [SerializeField, Header("プレイヤーの範囲")] private float _playerDistance;
     private void Awake()
     {
         _playerTrans = GameObject.FindWithTag("Player").transform;
@@ -61,27 +24,27 @@ public class EnemyManager : MonoBehaviour
 
     private void Start()
     {
-        _apperTimeCount = 0;
-        StartCoroutine(EnemyApperCoroutine());
+        _appearTimeCount = 0;
+        StartCoroutine(EnemyAppearCoroutine());
     }
 
-    private void Update() 
+    private void Update()
     {
-        EnemyApper();
+        EnemyAppear();
     }
 
-    private void EnemyApper()
+    private void EnemyAppear()
     {
-        _apperTimeCount += Time.deltaTime;
+        _appearTimeCount += Time.deltaTime;
 
-        if(_apperTimeCount > _apperTime)
+        if (_appearTimeCount > _appearTime)
         {
-            StartCoroutine(EnemyApperCoroutine());
-            _apperTimeCount = 0;
-        }   
+            StartCoroutine(EnemyAppearCoroutine());
+            _appearTimeCount = 0;
+        }
     }
 
-    private IEnumerator EnemyApperCoroutine()
+    private IEnumerator EnemyAppearCoroutine()
     {
         for (int i = 0; i < _enemyAmount; i++)
         {
@@ -99,15 +62,11 @@ public class EnemyManager : MonoBehaviour
 
             Instantiate(_enemies[enemyRnd], posRnd, Quaternion.identity);
 
-            yield return new WaitForSeconds(_apperLag);
+            yield return new WaitForSeconds(_appearLag);
         }
     }
 
-    private IEnumerator EnemyApperLag()
-    {
-        yield return new WaitForSeconds(_apperLag);
-    }
-
+    //Editor拡張
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.white;

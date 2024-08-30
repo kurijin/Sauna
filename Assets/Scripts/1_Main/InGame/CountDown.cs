@@ -3,19 +3,16 @@ using UnityEngine;
 
 public class CountDown : MonoBehaviour
 {
-    [SerializeField]
-    private float _countDownTime;
+    [SerializeField] private float _countDownTime;
 
     [ReadOnly]
     private float _currentTime;
 
     private TextMeshProUGUI _countDownText;
-
-    // サウンドマネージャー参照
-    private SoundManager soundManager;
-
-    // スタート音AudioClip
-    [SerializeField] private AudioClip StartSE;
+    
+    private SoundManager _soundManager;
+    
+    [SerializeField,Header("スタート音")] private AudioClip _startSE;
 
     private void Awake()
     {
@@ -40,12 +37,12 @@ public class CountDown : MonoBehaviour
             GameObject audioManager = GameObject.Find("AudioManager");
             if (audioManager != null)
             {
-                soundManager = audioManager.GetComponent<SoundManager>();
+                _soundManager = audioManager.GetComponent<SoundManager>();
             }
 
-            if (soundManager != null && StartSE != null)
+            if (_soundManager != null && _startSE != null)
             {
-                soundManager.PlaySE(StartSE);
+                _soundManager.PlaySE(_startSE);
             }
 
             Debug.Log("カウントダウン終了");

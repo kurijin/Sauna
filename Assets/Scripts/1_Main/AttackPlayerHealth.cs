@@ -4,23 +4,22 @@ using UnityEngine;
 public class AttackPlayerHealth : MonoBehaviour
 {
     // 敵のhpのテキストUIを参照
-    [SerializeField] private TextMeshProUGUI hpText;
+    [SerializeField] private TextMeshProUGUI _hpText;
+    private AttackPlayer _attackPlayer;
 
-    private AttackPlayer attackPlayer;
-
-    void Start()
+    private void Start()
     {
-        attackPlayer = GetComponent<AttackPlayer>();
+        _attackPlayer = GetComponent<AttackPlayer>();
     }
 
-    void Update()
+    private void Update()
     {
         // 敵のHPを参照してテキストUIに表示
-        hpText.text = attackPlayer.hp.ToString();
+        _hpText.text = _attackPlayer._hp.ToString();
     }
 
     public void SetText(string hp)
     {
-        hpText.text = hp;
+        _hpText.text = hp;
     }
 }

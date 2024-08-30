@@ -1,36 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-
+/// <summary>Hp管理</summary>
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private SoundManager soundManager;
-    // プレイヤーのダメージと回復音と死亡音のAudioClip
-    [SerializeField] private AudioClip takeDamegeSE;
-    [SerializeField] private AudioClip DeathSE;
-    [SerializeField] private AudioClip HealSE;
+    [SerializeField] private SoundManager _soundManager;
+    [SerializeField,Header("DamageSE")] private AudioClip _takeDamageSE;
+    [SerializeField,Header("死亡時の音")] private AudioClip _deathSE;
+    [SerializeField,Header("回復時の音")] private AudioClip _healSE;
 
     [ReadOnly]
     public int HP;
-    public int maxHP;
+    public int MaxHP;
     public Slider HpSlider;
 
-    void Start()
+    private void Start()
     {
-        _Initialized();
+        Initialized();
     }
 
     private void Update()
     {
-        _UpdateHealthBar();
+        UpdateHealthBar();
     }
 
     public void TakeDamage(float damage)
     {
-        soundManager.PlaySE(takeDamegeSE);
+        _soundManager.PlaySE(_takeDamageSE);
         HP -= (int)damage;
         if (HP < 0)
         {
@@ -41,24 +37,24 @@ public class PlayerHealth : MonoBehaviour
 
     public void Heal(int amount)
     {
-        soundManager.PlaySE(HealSE);
+        _soundManager.PlaySE(_healSE);
         HP += amount;
-        if (HP > maxHP) HP = maxHP;
+        if (HP > MaxHP) HP = MaxHP;
     }
 
     private void Dead()
     {
-        soundManager.PlaySE(DeathSE);
+        _soundManager.PlaySE(_deathSE);
         InGameFlow.Instance.FinishGame();
     }
 
-    private void _Initialized()
+    private void Initialized()
     {
-        if (HP < maxHP) HP = maxHP;
-        HpSlider.maxValue = maxHP;
+        if (HP < MaxHP) HP = MaxHP;
+        HpSlider.maxValue = MaxHP;
         HpSlider.value = HP;
     }
-    private void _UpdateHealthBar()
+    private void UpdateHealthBar()
     {
         HpSlider.value = HP;
     }

@@ -3,45 +3,36 @@
 public class InGameFlow : MonoBehaviour
 {
     private static InGameFlow _InGameFlow;
-
     public static InGameFlow Instance => _InGameFlow;
 
-    [SerializeField]
-    private Transform _player;
+    [SerializeField] private Transform _player;
 
-    [SerializeField,ReadOnly]
-    private Difficulty[] _difficulty;
+    [SerializeField, ReadOnly] private Difficulty[] _difficulty;
 
-    [SerializeField]
-    private float[] _difficultyTime;
+    [SerializeField] private float[] _difficultyTime;
 
-    private int _difficultyID = 0;
+    private int _difficultyID;
 
-    private float _aliveTime = 0;
+    private float _aliveTime;
 
-    [SerializeField]
-    private GameObject _startTimer;
+    [SerializeField] private GameObject _startTimer;
 
-    [SerializeField]
-    private GameObject _timeManager;
+    [SerializeField] private GameObject _timeManager;
 
     private GameObject _timeManagerInstance;
 
-[SerializeField]
-    private GameObject _finishCanvas;
+    [SerializeField] private GameObject _finishCanvas;
 
     private GameObject _finishCanvasInstance;
 
+    private bool _isStart;
 
-
-    private bool _isStart = false;
+    private bool _isFinish;
 
     public void StartGame()
     {
         _isStart = true;
     }
-
-    private bool _isFinish = false;
 
     public void FinishGame()
     {
@@ -51,7 +42,7 @@ public class InGameFlow : MonoBehaviour
     private void Awake()
     {
         _InGameFlow = this;
-        _difficulty = this.GetComponentsInChildren<Difficulty>();
+        _difficulty = GetComponentsInChildren<Difficulty>();
         SetDifficulty(-1);
     }
 
@@ -60,20 +51,17 @@ public class InGameFlow : MonoBehaviour
         _isStart = false;
         _difficultyID = 0;
         _aliveTime = 0;
-        
+
 
         if (_difficulty.Length != _difficultyTime.Length)
         {
             Debug.LogError("個数がマッチしていません");
         }
 
-        //クリックでスタートのカウントダウン
         StartTimer();
     }
 
-    /// <summary>
-    /// スタートまでのカウント
-    /// </summary>
+    /// <summary>スタートまでのカウント</summary>
     private void StartTimer()
     {
         Instantiate(_startTimer);
@@ -86,22 +74,18 @@ public class InGameFlow : MonoBehaviour
             FinishGame();
         }
 
-        if (_isStart == true && _isFinish == false)
+        if (_isStart && _isFinish == false)
         {
-            Debug.Log("スタート");
-
-            if(_timeManagerInstance == null)
+            if (_timeManagerInstance == null)
             {
                 _timeManagerInstance = Instantiate(_timeManager);
             }
-            
 
             DifficultyManage();
         }
 
-        if (_isFinish == true)
+        if (_isFinish)
         {
-            Debug.Log("終了");
             SetDifficulty(-1);
             //終了時にクリックでリザルト画面
             if (_finishCanvasInstance == null)
@@ -109,7 +93,6 @@ public class InGameFlow : MonoBehaviour
                 _finishCanvasInstance = Instantiate(_finishCanvas);
                 TimeScore.Instance.SaveTime(TimeManager.Instance.GetTime());
             }
-            
         }
     }
 

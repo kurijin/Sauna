@@ -2,36 +2,34 @@
 
 public class BurnOutEffect : MonoBehaviour
 {
-    public Shader burnShader; 
-    public float burnDuration = 2.0f;
-    private Material material;
-    private float burnAmount = 0.0f;
-    private bool isBurning = false;
+    public Shader _burnShader;
+    public float _burnDuration = 2.0f;
+    private Material _material;
+    private float _burnAmount;
+    private bool _isBurning;
 
-    void Start()
+    private void Start()
     {
-
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null && burnShader != null)
+        if (spriteRenderer != null && _burnShader != null)
         {
-            material = new Material(spriteRenderer.material);
-            material.shader = burnShader;
-            spriteRenderer.material = material;
+            _material = new Material(spriteRenderer.material);
+            _material.shader = _burnShader;
+            spriteRenderer.material = _material;
 
             Texture2D noiseTexture = GenerateTexture();
-            material.SetTexture("_NoiseTex", noiseTexture);
+            _material.SetTexture("_NoiseTex", noiseTexture);
         }
     }
 
-    void Update()
+    private void Update()
     {
-
-        if (isBurning)
+        if (_isBurning)
         {
-            burnAmount += Time.deltaTime / burnDuration;
-            material.SetFloat("_BurnAmount", burnAmount);
+            _burnAmount += Time.deltaTime / _burnDuration;
+            _material.SetFloat("_BurnAmount", _burnAmount);
 
-            if (burnAmount >= 1.0f)
+            if (_burnAmount >= 1.0f)
             {
                 Destroy(gameObject);
             }
@@ -41,11 +39,11 @@ public class BurnOutEffect : MonoBehaviour
     // 燃焼を開始する
     public void StartBurning()
     {
-        isBurning = true;
+        _isBurning = true;
         Debug.Log("燃焼");
     }
 
-    Texture2D GenerateTexture()
+    private Texture2D GenerateTexture()
     {
         Texture2D texture = new Texture2D(256, 256);
 

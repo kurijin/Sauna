@@ -2,14 +2,13 @@ using UnityEngine;
 
 public class PauseManager : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _pauseCanvas;
+    [SerializeField] private GameObject _pauseCanvas;
+
     //Pauseメニューの音
-    [SerializeField] private SoundManager soundManager;
-    [SerializeField] private AudioClip pauseSE;
+    [SerializeField] private SoundManager _soundManager;
+    [SerializeField] private AudioClip _pauseSE;
     private GameObject _pauseCanvasInstance;
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -27,20 +26,18 @@ public class PauseManager : MonoBehaviour
 
     private void Pause()
     {
-        soundManager.PlaySE(pauseSE);
+        _soundManager.PlaySE(_pauseSE);
         Time.timeScale = 0;
         _pauseCanvasInstance = Instantiate(_pauseCanvas);
-
     }
 
     private void Resume()
     {
         Time.timeScale = 1;
 
-        if( _pauseCanvasInstance != null)
+        if (_pauseCanvasInstance != null)
         {
             Destroy(_pauseCanvasInstance);
         }
-        
     }
 }
