@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class DescriptionClickHandler : MonoBehaviour
 {
-    [SerializeField] private GameObject _titleUI;
-    [SerializeField] private GameObject _descriptionUI;
+    [SerializeField,Header("Title画面")] private GameObject _titleUI;
+    [SerializeField,Header("遊び方")] private GameObject _descriptionUI;
 
     //遊び方UIを表示してタイトル画面を非表示にする
     public void OnClickDescriptionUI()
