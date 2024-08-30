@@ -361,16 +361,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fc4f78f5051d864187e8211f0a1bee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 3
-  time: 1
-  hp: 1
-  alive: 0
-  appearSE: {fileID: 8300000, guid: d93306345264147298ee95d4574142ed, type: 3}
-  deathSE: {fileID: 8300000, guid: cd8a96171a43644b198c09e10f976990, type: 3}
-  damageInterval: 0.25
+  _power: 10
+  _time: 5
+  _hp: 10
+  _alive: 0
+  _appearSE: {fileID: 8300000, guid: d93306345264147298ee95d4574142ed, type: 3}
+  _deathSE: {fileID: 8300000, guid: cd8a96171a43644b198c09e10f976990, type: 3}
+  _damageInterval: 1
   _particle: {fileID: 7689618757670290347, guid: 2e8e2f6db8831d24d842c48de8428be7, type: 3}
-  hpSlider: {fileID: 5206590957996648495}
-  hpSE: {fileID: 8300000, guid: 7b2e1d9763a414eadbafd1ca0859aea1, type: 3}
+  _hpSlider: {fileID: 5206590957996648495}
+  _hpSE: {fileID: 8300000, guid: 028a6cfcb24634dfe9fd780181575b30, type: 3}
 --- !u!114 &5896249763324407686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,7 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad71925dd40ab4a7cbfa4e0d636ddd56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpText: {fileID: 7276169915445939467}
+  _hpText: {fileID: 7276169915445939467}
 --- !u!114 &268330021629883219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,8 +396,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b3cf99152cd86744afdd41ea2c02542, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  burnShader: {fileID: 4800000, guid: 6bee0b832345a364e88e615a19a512da, type: 3}
-  burnDuration: 1
+  _burnShader: {fileID: 4800000, guid: 6bee0b832345a364e88e615a19a512da, type: 3}
+  _burnDuration: 2
 --- !u!1 &5122572488257327502
 GameObject:
   m_ObjectHideFlags: 0

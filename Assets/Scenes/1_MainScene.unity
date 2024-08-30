@@ -298,12 +298,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676440046a88d1c4f8e16f2be34b83c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundManager: {fileID: 0}
-  takeDamegeSE: {fileID: 8300000, guid: 788db1823e7074cae8a5b96caa845bba, type: 3}
-  DeathSE: {fileID: 8300000, guid: ac57428f61cd8463dad2f89ffd66c55b, type: 3}
-  HealSE: {fileID: 8300000, guid: aa65301015a67408eadf808a59a4cc3f, type: 3}
+  _soundManager: {fileID: 2015519721}
+  _takeDamageSE: {fileID: 8300000, guid: 788db1823e7074cae8a5b96caa845bba, type: 3}
+  _deathSE: {fileID: 8300000, guid: ac57428f61cd8463dad2f89ffd66c55b, type: 3}
+  _healSE: {fileID: 8300000, guid: aa65301015a67408eadf808a59a4cc3f, type: 3}
   HP: 0
-  maxHP: 100
+  MaxHP: 100
   HpSlider: {fileID: 2126468187}
 --- !u!1001 &311487244
 PrefabInstance:
@@ -786,8 +786,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pauseCanvas: {fileID: 3013346014637830060, guid: d9fe0e0c701587c47824c91e3010168a, type: 3}
-  soundManager: {fileID: 0}
-  pauseSE: {fileID: 8300000, guid: 0b9d885a3d94b474186f886720d86cd7, type: 3}
+  _soundManager: {fileID: 0}
+  _pauseSE: {fileID: 0}
 --- !u!1 &1719047729
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,6 +1127,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48ddecceacd3bec409f5ab6b01d7e0d1, type: 3}
+--- !u!114 &2015519721 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8356124545991546429, guid: 52c470bbb22baf1408e3f670a42e8152, type: 3}
+  m_PrefabInstance: {fileID: 534590605}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c4d2468cae34540bd087999c233fb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2126468184
 PrefabInstance:
   m_ObjectHideFlags: 0

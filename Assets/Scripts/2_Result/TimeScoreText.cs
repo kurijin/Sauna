@@ -9,5 +9,4 @@ public class TimeScoreText : MonoBehaviour
     {
         scoreText.text = $"記録： {TimeScore.Instance.GetTime().ToString("F2")} !!";
     }
-
 }

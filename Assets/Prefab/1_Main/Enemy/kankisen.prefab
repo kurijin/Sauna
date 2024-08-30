@@ -413,13 +413,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97175a4098214878819a3e7c5d9f705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 5
-  time: 5
-  hp: 3
-  alive: 0
-  appearSE: {fileID: 8300000, guid: cd48a486010a84ab884dcf478d0fec81, type: 3}
-  deathSE: {fileID: 8300000, guid: cd8a96171a43644b198c09e10f976990, type: 3}
-  hpSE: {fileID: 8300000, guid: 9718bfd1ffbfd457bb99357825a8c62e, type: 3}
+  _power: 10
+  _time: 5
+  _hp: 10
+  _alive: 0
+  _appearSE: {fileID: 8300000, guid: cd48a486010a84ab884dcf478d0fec81, type: 3}
+  _deathSE: {fileID: 8300000, guid: cd8a96171a43644b198c09e10f976990, type: 3}
+  _hpSE: {fileID: 8300000, guid: 9718bfd1ffbfd457bb99357825a8c62e, type: 3}
 --- !u!114 &4538088634899505715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,7 +432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad71925dd40ab4a7cbfa4e0d636ddd56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpText: {fileID: 5490007088012992339}
+  _hpText: {fileID: 5490007088012992339}
 --- !u!61 &6631038336594398513
 BoxCollider2D:
   m_ObjectHideFlags: 0
