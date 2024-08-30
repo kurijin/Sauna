@@ -1,6 +1,6 @@
 using UnityEngine;
-using Random = UnityEngine.Random;
 
+/// <summary>アイテムの生成を管理するクラス</summary>
 public class ItemGenerator : MonoBehaviour
 {
     [SerializeField, Header("アイテムスプライト")] private GameObject _itemSprite;
@@ -9,7 +9,7 @@ public class ItemGenerator : MonoBehaviour
 
     [SerializeField, Header("クールタイムの最大値")] private float _maxCoolTime;
 
-    private float _itemCreateCoolTime = 0f;
+    private float _itemCreateCoolTime;
 
     [SerializeField,Header("生成する位置")] private Vector2 _createPos;
 
@@ -18,9 +18,7 @@ public class ItemGenerator : MonoBehaviour
         CreateHealthItem();
     }
 
-    /// <summary>
-    /// ランダムにItemを生成する
-    /// </summary>
+    /// <summary>ランダムにItemを生成する</summary>
     private void CreateHealthItem()
     {
         _itemCreateCoolTime += Time.deltaTime;

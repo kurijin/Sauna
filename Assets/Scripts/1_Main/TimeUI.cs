@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class TimeUI : MonoBehaviour
 {
-    public TextMeshProUGUI text;
+    [SerializeField]private TextMeshProUGUI _text;
 
     void Update()
     {
-        text.text = TimeManager.Instance?.GetTime().ToString("F2");
+        _text.text = TimeManager.Instance?.GetTime().ToString("F2");
     }
 }

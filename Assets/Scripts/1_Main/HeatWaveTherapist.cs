@@ -1,31 +1,29 @@
 ﻿using UnityEngine;
-using static UnityEngine.ParticleSystem;
 
-public class Neppasi : AttackPlayer
+public class HeatWaveTherapist : AttackPlayer
 {
     private BurnOutEffect _effect;
     private AttackPlayerHealth _health;
 
-    [SerializeField] 
-    private AudioClip hpSE;
+    [SerializeField] private AudioClip _hpSE;
 
     protected override void Start()
     {
         base.Start();
-        _health = this.GetComponent<AttackPlayerHealth>();
-        _effect = this.GetComponent<BurnOutEffect>();
+        _health = GetComponent<AttackPlayerHealth>();
+        _effect = GetComponent<BurnOutEffect>();
     }
 
     // オブジェクトがクリックされたらhpが減る、hp0でEnemyのDie()を呼ぶ。
-    void OnMouseDown()
+    private void OnMouseDown()
     {
         if (Time.timeScale != 0f)
         {
-            soundManager.PlaySE(hpSE);
-            hp--;
+            soundManager.PlaySE(_hpSE);
+            _hp--;
         }
 
-        if (hp <= 0)
+        if (_hp <= 0)
         {
             soundManager.StopSound();
             Die();
@@ -36,16 +34,13 @@ public class Neppasi : AttackPlayer
     {
         _effect.StartBurning();
 
-        if (soundManager != null && deathSE != null)
+        if (soundManager != null && _deathSE != null)
         {
-            soundManager.PlaySE(deathSE);
+            soundManager.PlaySE(_deathSE);
         }
 
         _health.SetText("");
         Destroy(_health);
-
         Destroy(this);
-        
-        //base.Die();
     }
 }

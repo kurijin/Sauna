@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c565874d26b39894d9d736c812f7cafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemSprite: {fileID: 3304804131355166480, guid: a73b73c485308d147975f16f1cebacc3, type: 3}
+  _itemSprite: {fileID: 0}
   _minCoolTime: 3
   _maxCoolTime: 5
   _createPos: {x: 0, y: 0}

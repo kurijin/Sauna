@@ -3,33 +3,29 @@ using UnityEngine.UI;
 
 public class Customer : AttackPlayer
 {
-    private float timeSinceLastDamage;
-    public float damageInterval = 1f;  // ダメージを受ける間隔（秒）
-    private Collider2D objectCollider2D;
+    private float _timeSinceLastDamage;
+    public float _damageInterval = 1f;  // ダメージを受ける間隔（秒）
+    private Collider2D _objectCollider2D;
 
-    [SerializeField]
-    private ParticleSystem _particle;
+    [SerializeField] private ParticleSystem _particle;
 
     private BurnOutEffect _effect;
     private AttackPlayerHealth _health;
 
-    [SerializeField]
-    private Slider hpSlider;  
-
-    [SerializeField] 
-    private AudioClip hpSE;
+    [SerializeField] private Slider _hpSlider;
+    [SerializeField] private AudioClip _hpSE;
 
     protected override void Start()
     {
         base.Start();
         _health = GetComponent<AttackPlayerHealth>();
-        objectCollider2D = GetComponent<Collider2D>();
+        _objectCollider2D = GetComponent<Collider2D>();
         _effect = GetComponent<BurnOutEffect>();
-        timeSinceLastDamage = 0f;
+        _timeSinceLastDamage = 0f;
 
-        hpSlider.maxValue = damageInterval;
-        hpSlider.value = damageInterval;
-        hpSlider.gameObject.SetActive(false);
+        _hpSlider.maxValue = _damageInterval;
+        _hpSlider.value = _damageInterval;
+        _hpSlider.gameObject.SetActive(false);
     }
 
     protected override void Update()
@@ -40,18 +36,18 @@ public class Customer : AttackPlayer
         {
             if (Time.timeScale != 0f)
             {
-                timeSinceLastDamage += Time.deltaTime;
-                hpSlider.gameObject.SetActive(true);
-                hpSlider.value = Mathf.Clamp(damageInterval - timeSinceLastDamage, 0, damageInterval);
+                _timeSinceLastDamage += Time.deltaTime;
+                _hpSlider.gameObject.SetActive(true);
+                _hpSlider.value = Mathf.Clamp(_damageInterval - _timeSinceLastDamage, 0, _damageInterval);
 
                 // 一定時間経過後にHPを減らし、スライダーをリセット
-                if (timeSinceLastDamage >= damageInterval)
+                if (_timeSinceLastDamage >= _damageInterval)
                 {
-                    soundManager.PlaySE(hpSE);
-                    hp--;
-                    timeSinceLastDamage = 0f;  
+                    soundManager.PlaySE(_hpSE);
+                    _hp--;
+                    _timeSinceLastDamage = 0f;  
 
-                    if (hp <= 0)
+                    if (_hp <= 0)
                     {
                         soundManager.StopSound();
                         Die();
@@ -61,9 +57,9 @@ public class Customer : AttackPlayer
         }
         else
         {
-            hpSlider.gameObject.SetActive(false);
-            hpSlider.value = Mathf.Lerp(hpSlider.value, damageInterval, Time.deltaTime * 5f);
-            timeSinceLastDamage = 0f;
+            _hpSlider.gameObject.SetActive(false);
+            _hpSlider.value = Mathf.Lerp(_hpSlider.value, _damageInterval, Time.deltaTime * 5f);
+            _timeSinceLastDamage = 0f;
         }
     }
 
@@ -71,9 +67,9 @@ public class Customer : AttackPlayer
     private bool IsMouseInsideCollider()
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (objectCollider2D != null)
+        if (_objectCollider2D != null)
         {
-            return objectCollider2D.OverlapPoint(mousePosition);
+            return _objectCollider2D.OverlapPoint(mousePosition);
         }
         return false;
     }
@@ -82,15 +78,13 @@ public class Customer : AttackPlayer
     {
         _effect.StartBurning();
 
-        if (soundManager != null && deathSE != null)
+        if (soundManager != null && _deathSE != null)
         {
-            soundManager.PlaySE(deathSE);
+            soundManager.PlaySE(_deathSE);
         }
 
         _health.SetText("");
         Destroy(_health);
-
         Destroy(this);
-        // base.Die();
     }
 }

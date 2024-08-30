@@ -3,30 +3,27 @@ using System.Collections;
 
 public class AttackPlayer : MonoBehaviour
 {
-    /// 攻撃力と攻撃するまで滞在する時間 
-    [SerializeField] private float power;
-    [SerializeField] private float time;
-    [SerializeField] public float hp = 10;
-    //生きてるかどうかチェック
-    [SerializeField] private bool alive = false;
+    [SerializeField, Header("パワー")] private float _power;
+    [SerializeField, Header("時間")] private float _time;
+    [SerializeField, Header("HP")] public float _hp = 10;
+    [SerializeField, Header("生存判定")] private bool _alive;
 
     // サウンドマネージャー参照
     protected SoundManager soundManager;
 
-    // 出撃音と死亡音とプレイヤーのダメージのAudioClip
-    [SerializeField] private AudioClip appearSE;
-    [SerializeField] protected AudioClip deathSE;
+    [SerializeField, Header("出撃音")] private AudioClip _appearSE;
+    [SerializeField, Header("死亡音")] protected AudioClip _deathSE;
 
-    private GameObject supportUI;
+    private GameObject _supportUI;
 
     /// 敵が出現してから消えるまでの時間を測る
-    private float elapsedTime;
+    private float _elapsedTime;
 
     protected virtual void Start()
     {
         Transform canvasTransform = gameObject.transform.Find("Canvas");
-        supportUI = canvasTransform.Find("Image")?.gameObject;
-        supportUI.SetActive(false);
+        _supportUI = canvasTransform.Find("Image")?.gameObject;
+        _supportUI.SetActive(false);
         StartCoroutine(Blink());
 
         GameObject audioManager = GameObject.Find("AudioManager");
@@ -37,25 +34,25 @@ public class AttackPlayer : MonoBehaviour
             soundManager = audioManager.GetComponent<SoundManager>();
         }
 
-        if (soundManager != null && appearSE != null)
+        if (soundManager != null && _appearSE != null)
         {
-            soundManager.PlaySE(appearSE);
+            soundManager.PlaySE(_appearSE);
         }
 
-        elapsedTime = 0f;
+        _elapsedTime = 0f;
     }
 
     protected virtual void Update()
     {
-        elapsedTime += Time.deltaTime;
+        _elapsedTime += Time.deltaTime;
 
-        if(elapsedTime >= 1f)
+        if (_elapsedTime >= 1f)
         {
-            supportUI.SetActive(true);
+            _supportUI.SetActive(true);
         }
-    
+
         // 滞在時間を超えたら攻撃
-        if (elapsedTime >= time)
+        if (_elapsedTime >= _time)
         {
             Attack();
         }
@@ -66,25 +63,25 @@ public class AttackPlayer : MonoBehaviour
     {
         GameObject player = GameObject.FindWithTag("Player");
         PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
-        playerHealth.TakeDamage(power);
+        playerHealth.TakeDamage(_power);
 
         // aliveがtrueなら消える
-        if (alive)
+        if (_alive)
         {
             Debug.Log("消える");
             Destroy(gameObject);
         }
 
         // 経過時間リセット
-        elapsedTime = 0f;
+        _elapsedTime = 0f;
     }
 
     // 敵が死亡する際の処理(派生からしか呼び出せない)
     protected virtual void Die()
     {
-        if (soundManager != null && deathSE != null)
+        if (soundManager != null && _deathSE != null)
         {
-            soundManager.PlaySE(deathSE);
+            soundManager.PlaySE(_deathSE);
         }
 
         // 敵削除
@@ -94,12 +91,12 @@ public class AttackPlayer : MonoBehaviour
     // 点滅して消える処理
     private IEnumerator Blink()
     {
-        while (true) 
+        while (true)
         {
-            supportUI.GetComponent<CanvasRenderer>().SetAlpha(0f); 
-            yield return new WaitForSeconds(0.8f); 
-            supportUI.GetComponent<CanvasRenderer>().SetAlpha(1f); 
-            yield return new WaitForSeconds(0.8f); 
+            _supportUI.GetComponent<CanvasRenderer>().SetAlpha(0f);
+            yield return new WaitForSeconds(0.8f);
+            _supportUI.GetComponent<CanvasRenderer>().SetAlpha(1f);
+            yield return new WaitForSeconds(0.8f);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+/// <summary>回復アイテムクラス</summary>
 public class HealItem : MonoBehaviour
 {
     [SerializeField] private int _healPoint;
@@ -25,13 +26,13 @@ public class HealItem : MonoBehaviour
 
         if (_destroyTime <= 0)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 
     private void OnMouseDown()
     {
         _playerHealth.Heal(_healPoint);
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 }

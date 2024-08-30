@@ -1,21 +1,20 @@
 using UnityEngine;
 
-public class Kankisen : AttackPlayer
+public class VentilationFan : AttackPlayer
 {
     //始点と現在位置の変数
-    private Vector2 initialPosition;  
-    private Vector2 previousDirection;
-    private float angleSum = 0f;  
-    private Collider2D objectCollider2D;
+    private Vector2 _initialPosition;  
+    private Vector2 _previousDirection;
+    private float _angleSum;  
+    private Collider2D _col;
 
-    [SerializeField] 
-    private AudioClip hpSE;
+    [SerializeField,Header("鳴らしたいSE")] private AudioClip _hpSE;
 
     protected override void Start()
     {
         base.Start();
         // オブジェクトに付いているコライダーを取得
-        objectCollider2D = GetComponent<Collider2D>();
+        _col = GetComponent<Collider2D>();
     }
 
     protected override void Update()
@@ -25,50 +24,50 @@ public class Kankisen : AttackPlayer
         if (Input.GetMouseButtonDown(0) && IsMouseInsideCollider())
         {
             // ぐるぐるをし始める場所の記録、オブジェクト中心にぐるぐるが検出される
-            initialPosition = Camera.main.WorldToScreenPoint(transform.position);
-            previousDirection = (Vector2)Input.mousePosition - initialPosition;
-            angleSum = 0f;
+            _initialPosition = Camera.main.WorldToScreenPoint(transform.position);
+            _previousDirection = (Vector2)Input.mousePosition - _initialPosition;
+            _angleSum = 0f;
         }
 
         if (Input.GetMouseButton(0) && IsMouseInsideCollider())
         {
-            Vector2 currentDirection = (Vector2)Input.mousePosition - initialPosition;
+            Vector2 currentDirection = (Vector2)Input.mousePosition - _initialPosition;
 
             // 角度差を計算
-            float angle = Vector2.SignedAngle(previousDirection, currentDirection);
-            angleSum += angle;
+            float angle = Vector2.SignedAngle(_previousDirection, currentDirection);
+            _angleSum += angle;
 
             // 360度を超えるとhp減らす
-            if (Mathf.Abs(angleSum) >= 360f)
+            if (Mathf.Abs(_angleSum) >= 360f)
             {
                 if (Time.timeScale != 0f)
                 {
-                    soundManager.PlaySE(hpSE);
-                    hp--;
+                    soundManager.PlaySE(_hpSE);
+                    _hp--;
                 }
-                angleSum = 0f;  
+                _angleSum = 0f;  
             }
 
             // HPが0になったらキャラクターが死ぬ
-            if (hp <= 0)
+            if (_hp <= 0)
             {
                 soundManager.StopSound();
                 Die();
             }
 
             // 現在の方向を記録
-            previousDirection = currentDirection;
+            _previousDirection = currentDirection;
         }
     }
 
-    //コライダーないにあるかの判定
+    //コライダー内にあるかの判定
     private bool IsMouseInsideCollider()
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (objectCollider2D != null)
+        if (_col != null)
         {
-            return objectCollider2D.OverlapPoint(mousePosition);
+            return _col.OverlapPoint(mousePosition);
         }
 
         return false;

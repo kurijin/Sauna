@@ -2,14 +2,15 @@ using UnityEngine;
 
 public class ButtonClickSound : MonoBehaviour
 {
-    [SerializeField] private SoundManager soundManager;
-    [SerializeField] private AudioClip buttonSE;
+    [SerializeField,Header("サウンドを管理するオブジェクト")] private SoundManager _soundManager;
+    [SerializeField,Header("鳴らしたいSE音")] private AudioClip _buttonSE;
 
+    //Buttonのクリックイベントで呼ぶクラス
     public void PlayButtonSound()
     {
-        if (soundManager != null && buttonSE != null)
+        if (_soundManager != null && _buttonSE != null)
         {
-            soundManager.PlaySE(buttonSE);
+            _soundManager.PlaySE(_buttonSE);
         }
     }
 }
