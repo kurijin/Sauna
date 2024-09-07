@@ -1,57 +1,50 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-
-
-/// </<summary>
+/// <summary>
 /// タイトルシーンのボタン管理全部
 /// Canvasは合計5つ（タイトル、クレジット、モードセレクト、難易度選択,遊び方)
 /// </summary>
-/// /// 
 public class ButtonSelect : MonoBehaviour
 {
-    [SerializeField,Header("タイトルのUI")] private GameObject Title;
-    [SerializeField,Header("クレジットのUI")] private GameObject credit;
-    [SerializeField,Header("モード画面のUI")] private GameObject modeSelect;    
-    [SerializeField,Header("難易度選択画面のUI")] private GameObject difficulySelect;
-    [SerializeField,Header("遊び方のUI")] private GameObject HowtoPlay;
+    [SerializeField,Header("タイトルのUI")] private GameObject _title;
+    [SerializeField,Header("クレジットのUI")] private GameObject _credit;
+    [SerializeField,Header("モード画面のUI")] private GameObject _modeSelect;    
+    [SerializeField,Header("難易度選択画面のUI")] private GameObject _difficultySelect;
+    [SerializeField,Header("遊び方のUI")] private GameObject _howtoPlay;
 
     /// ボタンの音声
     [SerializeField,Header("サウンドマネージャーのオブジェクト")] private SoundManager _soundManager;
     [SerializeField,Header("ボタンのクリック音")] private AudioClip _buttonSE;
-
-
+    
     //最初の画面のPlay
     public void OnClickPlayButton()
     {
         _soundManager.PlaySE(_buttonSE);
-        Title.SetActive(false);
-        modeSelect.SetActive(true);
+        _title.SetActive(false);
+        _modeSelect.SetActive(true);
     }
     //クレジットボタン
     public void OnClickCreditUI()
     {
         _soundManager.PlaySE(_buttonSE);
-        Title.SetActive(false);
-        credit.SetActive(true);
+        _title.SetActive(false);
+        _credit.SetActive(true);
     }
     //遊び方ボタン
     public void OnClickHowtoPlay()
     {
         _soundManager.PlaySE(_buttonSE);
-        Title.SetActive(false);
-        HowtoPlay.SetActive(true);
+        _title.SetActive(false);
+        _howtoPlay.SetActive(true);
     }
     
-
     //モード選択
     //チャレンジモードボタン
     public void OnClickChallenge()
     {
         _soundManager.PlaySE(_buttonSE);
-        modeSelect.SetActive(false);
-        difficulySelect.SetActive(true);
+        _modeSelect.SetActive(false);
+        _difficultySelect.SetActive(true);
     }
 
     //エンドレスボタン
@@ -65,10 +58,10 @@ public class ButtonSelect : MonoBehaviour
     public void OnClickBacktoTitle()
     {
         _soundManager.PlaySE(_buttonSE);
-        Title.SetActive(true);
-        modeSelect.SetActive(false);
-        credit.SetActive(false);
-        HowtoPlay.SetActive(false);
+        _title.SetActive(true);
+        _modeSelect.SetActive(false);
+        _credit.SetActive(false);
+        _howtoPlay.SetActive(false);
     }
 
     //難易度選択
@@ -76,8 +69,8 @@ public class ButtonSelect : MonoBehaviour
     public void OnClickBacktoMode()
     {
         _soundManager.PlaySE(_buttonSE);
-        modeSelect.SetActive(true);
-        difficulySelect.SetActive(false);
+        _modeSelect.SetActive(true);
+        _difficultySelect.SetActive(false);
     }
 
     /// <summary>
