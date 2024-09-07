@@ -81,10 +81,8 @@ public class AttackPlayer : MonoBehaviour
     //自分のIDを保持して、重なっているかどうかの判定、重なっていないならtrue,重なっていてかつ自分のIDが大きいのならtrueを返す。
     protected bool CanBeAttacked()
     {
-        // カプセルコライダーのサイズで判定を行う
+        // カプセルコライダーのサイズで判定を行う,重なってるものを判定する
         CapsuleCollider2D capsuleCollider = GetComponent<CapsuleCollider2D>();
-
-        // カプセルコライダーのサイズを取得してOverlapBoxAllの判定を行う
         Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, capsuleCollider.bounds.size, 0f);
 
         foreach (Collider2D collider in colliders)
@@ -98,9 +96,9 @@ public class AttackPlayer : MonoBehaviour
                 {
                     AttackPlayer otherEnemy = collider.GetComponent<AttackPlayer>();
 
-                    if (otherEnemy != null && otherEnemy.ID > this.ID)
+                    if (otherEnemy != null && otherEnemy.ID < this.ID)
                     {
-                        return false; // 自分のIDが他の敵より大きい場合のみ攻撃可能
+                        return false; 
                     }
                 }
             }
