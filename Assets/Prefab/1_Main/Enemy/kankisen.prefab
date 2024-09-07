@@ -325,6 +325,7 @@ GameObject:
   - component: {fileID: 2447128261291822619}
   - component: {fileID: 4538088634899505715}
   - component: {fileID: 6631038336594398513}
+  - component: {fileID: 6169642239395675842}
   m_Layer: 0
   m_Name: kankisen
   m_TagString: Untagged
@@ -478,6 +479,41 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 27.716948, y: 26.739803}
   m_EdgeRadius: 0
+--- !u!70 &6169642239395675842
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3963344559432182553}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.329566, y: -0.6920159}
+  m_Size: {x: 6.5489054, y: 6.5489054}
+  m_Direction: 0
 --- !u!1001 &6254487848932397468
 PrefabInstance:
   m_ObjectHideFlags: 0

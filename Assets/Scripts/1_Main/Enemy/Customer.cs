@@ -32,7 +32,7 @@ public class Customer : AttackPlayer
     {
         base.Update();
 
-        if (Input.GetMouseButton(0) && IsMouseInsideCollider())  
+        if (Input.GetMouseButton(0) && IsMouseInsideCollider() && CanBeAttacked())  
         {
             if (Time.timeScale != 0f)
             {

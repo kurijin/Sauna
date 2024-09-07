@@ -19,6 +19,8 @@ public class AttackPlayer : MonoBehaviour
     /// 敵が出現してから消えるまでの時間を測る
     private float _elapsedTime;
 
+    public int ID { get; set; }
+
     protected virtual void Start()
     {
         Transform canvasTransform = gameObject.transform.Find("Canvas");
@@ -76,6 +78,37 @@ public class AttackPlayer : MonoBehaviour
         _elapsedTime = 0f;
     }
 
+    //自分のIDを保持して、重なっているかどうかの判定、重なっていないならtrue,重なっていてかつ自分のIDが大きいのならtrueを返す。
+    protected bool CanBeAttacked()
+    {
+        // カプセルコライダーのサイズで判定を行う
+        CapsuleCollider2D capsuleCollider = GetComponent<CapsuleCollider2D>();
+
+        // カプセルコライダーのサイズを取得してOverlapBoxAllの判定を行う
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, capsuleCollider.bounds.size, 0f);
+
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.gameObject != gameObject)
+            {
+                // 他のオブジェクトのコライダーがCapsuleCollider2Dであるか確認
+                CapsuleCollider2D otherCapsule = collider.GetComponent<CapsuleCollider2D>();
+
+                if (otherCapsule != null)
+                {
+                    AttackPlayer otherEnemy = collider.GetComponent<AttackPlayer>();
+
+                    if (otherEnemy != null && otherEnemy.ID > this.ID)
+                    {
+                        return false; // 自分のIDが他の敵より大きい場合のみ攻撃可能
+                    }
+                }
+            }
+        }
+
+        return true;
+    } 
+
     // 敵が死亡する際の処理(派生からしか呼び出せない)
     protected virtual void Die()
     {
@@ -100,3 +133,6 @@ public class AttackPlayer : MonoBehaviour
         }
     }
 }
+
+
+
