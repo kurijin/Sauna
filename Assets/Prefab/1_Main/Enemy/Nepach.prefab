@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6195092636931536727}
   - component: {fileID: 8083162048322031936}
   - component: {fileID: 4122105976055106180}
+  - component: {fileID: 7372331251755893767}
   m_Layer: 0
   m_Name: Nepach
   m_TagString: Untagged
@@ -181,6 +182,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _burnShader: {fileID: 4800000, guid: 6bee0b832345a364e88e615a19a512da, type: 3}
   _burnDuration: 2
+--- !u!70 &7372331251755893767
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3304804131355166480}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.7412223, y: -0.15510744}
+  m_Size: {x: 2.3044574, y: 3.6170294}
+  m_Direction: 0
 --- !u!1 &3712583503195348448
 GameObject:
   m_ObjectHideFlags: 0

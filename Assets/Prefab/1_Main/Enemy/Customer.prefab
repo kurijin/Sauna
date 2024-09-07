@@ -229,6 +229,7 @@ GameObject:
   - component: {fileID: 2615434387373145260}
   - component: {fileID: 5896249763324407686}
   - component: {fileID: 268330021629883219}
+  - component: {fileID: 4107055739825915056}
   m_Layer: 0
   m_Name: Customer
   m_TagString: Untagged
@@ -398,6 +399,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _burnShader: {fileID: 4800000, guid: 6bee0b832345a364e88e615a19a512da, type: 3}
   _burnDuration: 2
+--- !u!70 &4107055739825915056
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5032221292258640861}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.32708848, y: 0.38982633}
+  m_Size: {x: 4.518513, y: 5.726513}
+  m_Direction: 0
 --- !u!1 &5122572488257327502
 GameObject:
   m_ObjectHideFlags: 0

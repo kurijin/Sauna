@@ -15,7 +15,7 @@ public class Roryu : AttackPlayer
      protected override void Start()
     {
         base.Start();
-        _objectCollider2D = GetComponent<Collider2D>();
+        _objectCollider2D = GetComponent<BoxCollider2D>();
     }
 
     // 上下にマウススクロールでダメージを受ける処理
@@ -23,7 +23,7 @@ public class Roryu : AttackPlayer
     {
         base.Update();
         // コライダー内かどうかで判定する
-        if (Input.GetMouseButton(0) && IsMouseInsideCollider())
+        if (Input.GetMouseButton(0) && IsMouseInsideCollider() && CanBeAttacked())
         {
             // 上下判定で、オブジェクトの中心を上下方向に通り過ぎたらダメージ
             if (_isUnder != Camera.main.WorldToScreenPoint(transform.position).y >= ((Vector2)Input.mousePosition).y)

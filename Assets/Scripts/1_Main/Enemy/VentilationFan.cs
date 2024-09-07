@@ -14,14 +14,14 @@ public class VentilationFan : AttackPlayer
     {
         base.Start();
         // オブジェクトに付いているコライダーを取得
-        _col = GetComponent<Collider2D>();
+        _col = GetComponent<BoxCollider2D>();
     }
 
     protected override void Update()
     {
         base.Update();
         //コライダー内かどうかで判定する
-        if (Input.GetMouseButtonDown(0) && IsMouseInsideCollider())
+        if (Input.GetMouseButtonDown(0) && IsMouseInsideCollider() && CanBeAttacked())
         {
             // ぐるぐるをし始める場所の記録、オブジェクト中心にぐるぐるが検出される
             _initialPosition = Camera.main.WorldToScreenPoint(transform.position);
@@ -29,7 +29,7 @@ public class VentilationFan : AttackPlayer
             _angleSum = 0f;
         }
 
-        if (Input.GetMouseButton(0) && IsMouseInsideCollider())
+        if (Input.GetMouseButton(0) && IsMouseInsideCollider() && CanBeAttacked())
         {
             Vector2 currentDirection = (Vector2)Input.mousePosition - _initialPosition;
 

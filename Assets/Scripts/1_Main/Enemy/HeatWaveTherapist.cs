@@ -17,7 +17,7 @@ public class HeatWaveTherapist : AttackPlayer
     // オブジェクトがクリックされたらhpが減る、hp0でEnemyのDie()を呼ぶ。
     private void OnMouseDown()
     {
-        if (Time.timeScale != 0f)
+        if (Time.timeScale != 0f && CanBeAttacked())
         {
             soundManager.PlaySE(_hpSE);
             _hp--;
