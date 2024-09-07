@@ -6,18 +6,18 @@ public class TimeScore : MonoBehaviour
 
     public static TimeScore Instance => _TimeScore;
 
-    private static float _clearTime = 0;
+    private static float _clearTime;
 
     private void Awake()
     {
         if (_TimeScore == null)
         {
             _TimeScore = this;
-            DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 
