@@ -1,81 +1,97 @@
 using UnityEngine;
+using UnityScreenNavigator.Runtime.Core.Page;
+using UnityScreenNavigator.Runtime.Core.Modal;
+using UnityEngine.UI;
+using System.Collections; 
 
 /// <summary>
-/// タイトルシーンのボタン管理全部
+/// タイトルシーン遷移管理
 /// Canvasは合計5つ（タイトル、クレジット、モードセレクト、難易度選択,遊び方)
 /// </summary>
+
 public class ButtonSelect : MonoBehaviour
 {
-    [SerializeField,Header("タイトルのUI")] private GameObject _title;
-    [SerializeField,Header("クレジットのUI")] private GameObject _credit;
-    [SerializeField,Header("モード画面のUI")] private GameObject _modeSelect;    
-    [SerializeField,Header("難易度選択画面のUI")] private GameObject _difficultySelect;
-    [SerializeField,Header("遊び方のUI")] private GameObject _howtoPlay;
+    [SerializeField, Header("サウンドマネージャーのオブジェクト")] private SoundManager _soundManager;
+    [SerializeField, Header("ボタンのクリック音")] private AudioClip _buttonSE;
+    [SerializeField,Header("シーン管理のCanvasを参照(page)")] private PageContainer _pageContainer;
+    [SerializeField,Header("シーン管理のCanvasを参照(modal)")] private ModalContainer _modalContainer;
 
-    /// ボタンの音声
-    [SerializeField,Header("サウンドマネージャーのオブジェクト")] private SoundManager _soundManager;
-    [SerializeField,Header("ボタンのクリック音")] private AudioClip _buttonSE;
-    
-    //最初の画面のPlay
+    // 最初の画面のPlay
     public void OnClickPlayButton()
     {
-        _soundManager.PlaySE(_buttonSE);
-        _title.SetActive(false);
-        _modeSelect.SetActive(true);
-    }
-    //クレジットボタン
-    public void OnClickCreditUI()
-    {
-        _soundManager.PlaySE(_buttonSE);
-        _title.SetActive(false);
-        _credit.SetActive(true);
-    }
-    //遊び方ボタン
-    public void OnClickHowtoPlay()
-    {
-        _soundManager.PlaySE(_buttonSE);
-        _title.SetActive(false);
-        _howtoPlay.SetActive(true);
-    }
-    
-    //モード選択
-    //チャレンジモードボタン
-    public void OnClickChallenge()
-    {
-        _soundManager.PlaySE(_buttonSE);
-        _modeSelect.SetActive(false);
-        _difficultySelect.SetActive(true);
+        StartCoroutine(PlaySoundAndPushModal("ModeModal"));
     }
 
-    //エンドレスボタン
+    // クレジットボタン
+    public void OnClickCreditUI()
+    {
+        StartCoroutine(PlaySoundAndPushPage("CreditPage"));
+    }
+
+    // 遊び方ボタン
+    public void OnClickHowtoPlay()
+    {
+        StartCoroutine(PlaySoundAndPushPage("HowtoPage"));
+    }
+
+    // モード選択
+
+    // チャレンジモードボタン
+    public void OnClickChallenge()
+    {
+        StartCoroutine(PlaySoundAndPushModal("DifficultyModal"));
+    }
+
+    // エンドレスボタン
     public void OnClickEndless()
     {
         _soundManager.PlaySE(_buttonSE);
         SceneChanger.Instance.ToMainScene();
     }
 
-    //クレジット、遊び方、モード選択共通のBackボタン
-    public void OnClickBacktoTitle()
+
+    // 共通のコルーチンメソッド(ページ)
+    private IEnumerator PlaySoundAndPushPage(string pageName)
     {
         _soundManager.PlaySE(_buttonSE);
-        _title.SetActive(true);
-        _modeSelect.SetActive(false);
-        _credit.SetActive(false);
-        _howtoPlay.SetActive(false);
+        yield return _pageContainer.Push(pageName, true);
     }
 
-    //難易度選択
-    //モード選択に戻る
-    public void OnClickBacktoMode()
+    // 共通のコルーチンメソッド(モーダル)
+    private IEnumerator PlaySoundAndPushModal(string pageName)
     {
         _soundManager.PlaySE(_buttonSE);
-        _modeSelect.SetActive(true);
-        _difficultySelect.SetActive(false);
+        yield return _modalContainer.Push(pageName, true);
+    }
+
+    // クレジット、遊び方共通のBackボタン
+    public void OnClickBacktoTitle()
+    {
+        StartCoroutine(BackToTitleCoroutine());
+    }
+
+    private IEnumerator BackToTitleCoroutine()
+    {
+        _soundManager.PlaySE(_buttonSE);
+        yield return _pageContainer.Pop(true);
+    }
+
+    // モード選択、難易度選択共通のbackボタン
+    public void OnClickCloseModal()
+    {
+        StartCoroutine(CloseModalCoroutine());
+    }
+
+    private IEnumerator CloseModalCoroutine()
+    {
+        _soundManager.PlaySE(_buttonSE);
+        yield return _modalContainer.Pop(true);
     }
 
     /// <summary>
     /// 難易度選択後の処理
     /// </summary>
+
     public void OnClickEasy()
     {
         _soundManager.PlaySE(_buttonSE);

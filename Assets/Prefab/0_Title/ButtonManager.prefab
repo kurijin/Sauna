@@ -44,9 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cda2fd538569644ab8c6fcbd5b2d10ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Title: {fileID: 0}
-  credit: {fileID: 0}
-  modeSelect: {fileID: 0}
-  difficulySelect: {fileID: 0}
-  soundManager: {fileID: 0}
-  buttonSE: {fileID: 8300000, guid: cf5b0b3250fec45b290beec28e4c9662, type: 3}
+  _title: {fileID: 0}
+  _credit: {fileID: 0}
+  _modeSelect: {fileID: 0}
+  _difficultySelect: {fileID: 0}
+  _howtoPlay: {fileID: 0}
+  _soundManager: {fileID: 0}
+  _buttonSE: {fileID: 8300000, guid: cf5b0b3250fec45b290beec28e4c9662, type: 3}
+  _pageContainer: {fileID: 0}

@@ -7,14 +7,14 @@ public class ChangeStar : MonoBehaviour
 {
     [SerializeField] private Image easyStar;
     [SerializeField] private Image normalStar;
-    [SerializeField] private Image difficultStar;
+    [SerializeField] private Image hardStar;
     [SerializeField] private Sprite whiteStar;
     [SerializeField] private Sprite yellowStar;
 
    /// <summary>
    /// 各ステージクリアしてたらPlayerPrefsで1,クリアしてなかったら0でクリア済みなら黄色い星になる。
    /// </summary>
-    void Start()
+    private void OnEnable()
     {
         // easy
         if(PlayerPrefs.GetInt("easyClear", 0) == 1)
@@ -36,14 +36,14 @@ public class ChangeStar : MonoBehaviour
             normalStar.sprite = whiteStar; 
         }
 
-        // difficult
-        if(PlayerPrefs.GetInt("difficultClear", 0) == 1)
+        // hard
+        if(PlayerPrefs.GetInt("hardClear", 0) == 1)
         {
-            difficultStar.sprite = yellowStar;
+            hardStar.sprite = yellowStar;
         } 
         else
         {
-            difficultStar.sprite = whiteStar; 
+            hardStar.sprite = whiteStar; 
         }
     }
 }
